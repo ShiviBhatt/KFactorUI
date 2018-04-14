@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Monoton|Rye|UnifrakturMaguntia');
+@import "~bootswatch/dist/cosmo/_variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/cosmo/_bootswatch";
+
+body {
+    background: #eee;
+}
+
+.kf-nav {
+    box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.2);
+}
+
+.kf-container {
+    margin-top: 80px;
+}
+
+.kf-logo {
+    background-image: url(assets/images/k-factor-logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    color: #ff7518 !important;
+    span {
+        color: #3fb618;
+        margin-left: 40px;
+        font-family: 'Monoton', cursive;
+    }
+}
+
+.kf-count {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.kf-card-top {
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-top: -20px;
+    .fa {
+        padding: 3rem;
+        font-size: 2rem;
+        color: #fff;
+        text-align: left;
+        margin-right: 1rem;
+        border-radius: 3px;
+        background: #868e96;
+    }
+    .kf-card-data {
+        margin-top: 2rem;
+        text-align: right;
+    }
+    .kf-small.fa {
+        padding: 2rem;
+        font-size: 2rem;
+        color: #fff;
+        text-align: left;
+        margin-right: 1rem;
+        border-radius: 3px;
+        background: #868e96;
+    }
+}
+
+.kf-availability {
+    box-shadow: 0px 0px 4px 1px rgba(55, 58, 60, 0.5);
+}
