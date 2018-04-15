@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-//import { Chart } from 'chart.js';
-import * as io  from 'socket.io-client';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { HomeService } from './homeService';
+import { Subscription } from 'rxjs/Subscription';
+import { SocketService } from '../socket.service';
 
 @Component({
   selector: 'app-home',
@@ -13,36 +13,16 @@ export class HomeComponent implements OnInit {
 
   chart: any;
   socket: any;
+  subscription: Subscription
 
   @ViewChild('sdChart')
   sdChart: ElementRef;
 
-  constructor(private router: Router, private homeService: HomeService) {
-      this.socket = io.connect('http://172.30.0.144:3000');
-      this.initWebsocketHandlers();
-      this.subscribeUser();
-  }
-
-  subscribeUser(): void {
-    let addUser = {
-        type: "ADD_USER", 
-        uid: "1234",
-        userName : "shemeem",
-        school: "mountdesert",
-        grade: "G5"
-    };
-    this.socket.emit('open', addUser);
-  }
-
-  initWebsocketHandlers(): void {
-    this.socket.on('message', msg => {
-      debugger;
-    });
-    this.socket.on('error', msg => {
-      debugger;
-    });
-    this.socket.on('close', msg => {
-      debugger;
+  constructor(private router: Router, private homeService: HomeService, private socketService: SocketService) {
+    this.subscription = this.socketService.getData().subscribe(msg => {
+        if (msg.type == 'C_NOTIFY') {
+            
+        }
     });
   }
 

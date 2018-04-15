@@ -1,17 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { SocketService } from '../socket.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   userMenus: KFMenu[];
+
+  subscription: Subscription;
+
   notifications: KFNotification[];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private socketService: SocketService) {
+    this.subscription = this.socketService.getData().subscribe(msg => {
+      if (msg.type == 'C_NOTIFY') {
+        this.notifications = msg.data;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit() {
     this.userMenus = [
@@ -24,23 +39,7 @@ export class HeaderComponent implements OnInit {
         displayName: 'Logout'
       }
     ];
-    this.notifications = [
-      { id: 'N123', title: 'Chris challenged you for Computer Science', hasRead: false},
-      { id: 'N124', title: 'Michel challenged you for General Knoledge', hasRead: false},
-      { id: 'N125', title: '<i>Shemeem</i> challenged you for <i>Java</i>', hasRead: false},
-      { id: 'N123', title: 'Chris challenged you for Computer Science', hasRead: false},
-      { id: 'N124', title: 'Michel challenged you for General Knoledge', hasRead: false},
-      { id: 'N125', title: '<i>Shemeem</i> challenged you for <i>Java</i>', hasRead: false},
-      { id: 'N123', title: 'Chris challenged you for Computer Science', hasRead: false},
-      { id: 'N124', title: 'Michel challenged you for General Knoledge', hasRead: false},
-      { id: 'N125', title: '<i>Shemeem</i> challenged you for <i>Java</i>', hasRead: false},
-      { id: 'N123', title: 'Chris challenged you for Computer Science', hasRead: false},
-      { id: 'N124', title: 'Michel challenged you for General Knoledge', hasRead: false},
-      { id: 'N125', title: '<i>Shemeem</i> challenged you for <i>Java</i>', hasRead: false},
-      { id: 'N123', title: 'Chris challenged you for Computer Science', hasRead: false},
-      { id: 'N124', title: 'Michel challenged you for General Knoledge', hasRead: false},
-      { id: 'N125', title: '<i>Shemeem</i> challenged you for <i>Java</i>', hasRead: false}
-    ];
+    this.notifications = [];
   }
 
   getUnreadNotification(): KFNotification[] {

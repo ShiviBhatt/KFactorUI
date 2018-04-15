@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import * as io  from 'socket.io-client';
+import { SocketService } from './socket.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,44 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  
   title = 'app';
+  socket: any;
+  
+  constructor(private socketService: SocketService) {
+    this.socket = io.connect('http://172.30.0.144:3000');
+    this.initWebsocketHandlers();
+    this.subscribeUser();
+  }
+
+  subscribeUser(): void {
+    let addUser = {
+        type: "ADD_USER", 
+        uid: "1232123",
+        userName : "Md Azaz Akhtar",
+        school: "Fermington",
+        grade: "G5"
+    };
+    this.socket.emit('open', addUser);
+  }
+
+  initWebsocketHandlers(): void {
+    
+    this.socket.on('connect', msg => {
+        
+    });
+
+    this.socket.on('message', msg => {
+      this.socketService.sendData(msg);
+    });
+
+    this.socket.on('error', msg => {
+      debugger;
+    });
+
+    this.socket.on('disconnect', msg => {
+      debugger;
+    });
+
+  }
 }

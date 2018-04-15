@@ -13,6 +13,7 @@ import { DataService } from './data.service';
 import { ChallengeViewerComponent } from './challenge-viewer/challenge-viewer.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeService } from './home/homeService';
+import { SocketService } from './socket.service';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { HomeService } from './home/homeService';
   ],
   providers: [
     DataService,
-    HomeService
+    HomeService,
+    SocketService
   ],
   bootstrap: [AppComponent]
 })
