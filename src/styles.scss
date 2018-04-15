@@ -34,6 +34,11 @@ body {
     top: 0;
 }
 
+.kf-noticeboard {
+    max-height: 400px;
+    overflow: auto;
+}
+
 .kf-card-top {
     margin-left: 4%;
     margin-right: 4%;

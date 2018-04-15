@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
@@ -9,6 +10,8 @@ import { ChallengesComponent } from './challenges/challenges.component';
 import { BoardComponent } from './board/board.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { PlaygroundComponent } from './playground/playground.component';
+import { DataService } from './data.service';
+import { ChallengeViewerComponent } from './challenge-viewer/challenge-viewer.component';
 
 
 @NgModule({
@@ -18,13 +21,17 @@ import { PlaygroundComponent } from './playground/playground.component';
     HomeComponent,
     ChallengesComponent,
     BoardComponent,
-    PlaygroundComponent
+    PlaygroundComponent,
+    ChallengeViewerComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    DataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

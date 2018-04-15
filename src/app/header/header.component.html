@@ -29,23 +29,37 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
     </form>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" 
           data-toggle="dropdown" 
-          href="#" role="button" 
+          href="javascript:;;" role="button" 
           aria-haspopup="true" 
           aria-expanded="false">
-          <span class="badge badge-danger kf-count">3</span>
+          <span *ngIf="getUnreadNotification().length > 0" 
+            class="badge badge-danger kf-count">
+            {{getUnreadNotification().length}}
+          </span>
           <i class="fa fa-bell"></i>
           Notifications
         </a>
         <div class="dropdown-menu dropdown-menu-right" 
           x-placement="bottom-start">
-          <a class="dropdown-item" href="#" *ngFor="let userMenu of userMenus">
-            {{userMenu.displayName}}
+          <p class="ml-3">You have {{getUnreadNotification().length}} unread notifications</p>
+          <div class="kf-noticeboard">
+            <a class="dropdown-item" 
+              [routerLink]="['challenges', notification.id]"
+              (click)="handleNotification(notification)" 
+              [ngClass]="{'font-weight-bold': !notification.hasRead}"
+              *ngFor="let notification of notifications">
+              <i class="fa fa-bolt"></i>
+              <span class="ml-1" [innerHTML]="notification.title"></span>
+            </a>
+          </div>
+          <a routerLink="/challenges" class="text-center mt-2 d-block" 
+            style="text-decoration: none">
+            View All
           </a>
         </div>
       </li>
@@ -56,19 +70,17 @@
           aria-haspopup="true" 
           aria-expanded="false">
           <i class="fa fa-user"></i>
-          User
+          Sam
         </a>
         <div class="dropdown-menu dropdown-menu-right" 
           x-placement="bottom-start">
-          <a class="dropdown-item" href="#" *ngFor="let userMenu of userMenus">
+          <a class="dropdown-item" 
+            href="javascript:;;" 
+            *ngFor="let userMenu of userMenus">
             {{userMenu.displayName}}
           </a>
         </div>
       </li>
     </ul>
-    <!-- <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-    </form> -->
   </div>
 </nav>

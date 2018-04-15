@@ -7,39 +7,58 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  kFactor: KFactor;
-
   userMenus: KFMenu[];
+  notifications: KFNotification[];
 
   constructor() { }
 
   ngOnInit() {
-    this.kFactor = {
-      logoName: 'K? Factor'
-    };
     this.userMenus = [
       {
         id: 'profile',
         displayName: 'Profile'
       },
       {
-        id: 'settings',
-        displayName: 'Settings'
-      },
-      {
         id: 'logout',
         displayName: 'Logout'
       }
-    ]
+    ];
+    this.notifications = [
+      { id: 'N123', title: 'Chris challenged you for Computer Science', hasRead: false},
+      { id: 'N124', title: 'Michel challenged you for General Knoledge', hasRead: false},
+      { id: 'N125', title: '<i>Shemeem</i> challenged you for <i>Java</i>', hasRead: false},
+      { id: 'N123', title: 'Chris challenged you for Computer Science', hasRead: false},
+      { id: 'N124', title: 'Michel challenged you for General Knoledge', hasRead: false},
+      { id: 'N125', title: '<i>Shemeem</i> challenged you for <i>Java</i>', hasRead: false},
+      { id: 'N123', title: 'Chris challenged you for Computer Science', hasRead: false},
+      { id: 'N124', title: 'Michel challenged you for General Knoledge', hasRead: false},
+      { id: 'N125', title: '<i>Shemeem</i> challenged you for <i>Java</i>', hasRead: false},
+      { id: 'N123', title: 'Chris challenged you for Computer Science', hasRead: false},
+      { id: 'N124', title: 'Michel challenged you for General Knoledge', hasRead: false},
+      { id: 'N125', title: '<i>Shemeem</i> challenged you for <i>Java</i>', hasRead: false},
+      { id: 'N123', title: 'Chris challenged you for Computer Science', hasRead: false},
+      { id: 'N124', title: 'Michel challenged you for General Knoledge', hasRead: false},
+      { id: 'N125', title: '<i>Shemeem</i> challenged you for <i>Java</i>', hasRead: false}
+    ];
   }
 
-}
+  getUnreadNotification(): KFNotification[] {
+    return this.notifications.filter((notification) => !notification.hasRead);
+  }
 
-export interface KFactor {
-  logoName: string;
+  handleNotification(notification: KFNotification): void {
+    notification.hasRead = true;
+  }
+
 }
 
 export interface KFMenu {
   id: string;
   displayName: string;
+}
+
+export interface KFNotification {
+  id: string;
+  title: string;
+  hasRead: boolean;
 }

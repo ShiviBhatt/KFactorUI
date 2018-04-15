@@ -1,0 +1,7 @@
+{
+    "domain": "localhost",
+    "port": "8082",
+    "appContext": "portal",
+    "restContext": "rest",
+    "sslEnabled": false
+}
