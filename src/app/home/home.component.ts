@@ -18,6 +18,10 @@ export class HomeComponent implements OnInit {
   topRankers: any;
   activeUsers: any;
   topics: Array<string>;
+  interestedTopics: any = [];
+  showModal: boolean = false;
+  allTopics: any = [];
+  doNotShowAgain: boolean = false;
 
   @ViewChild('sdChart')
   sdChart: ElementRef;
@@ -40,11 +44,31 @@ export class HomeComponent implements OnInit {
                         {"uid": "234", "userName": "Sam2", "school": "GHI", "grade": "7"}];
 
     this.topics = topics.topics;
+    this.topics.forEach((topic) => {
+      this.allTopics.push({"name": topic, checked: false});
+    });
+    this.showModal = true;
   }
 
   goToChallenge(user: string): void {
     this.homeService.user = user;
     this.router.navigate(['/challenges']);
+  }
+
+  selectedTopics(): void {
+    this.interestedTopics = this.allTopics
+    .filter(topic => topic.checked)
+    .map(topic => topic.name);
+    console.log(this.interestedTopics);
+    console.log(this.doNotShowAgain);
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+  }
+
+  skipTopics(): void {
+    this.showModal = false;
   }
 
 }

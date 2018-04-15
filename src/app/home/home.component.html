@@ -134,3 +134,36 @@
           </div>
       </div>
   </div>
+  <div class="modal fade show" [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+        <div class="modal-content">                           
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Select Topics of Interest</h4>
+                <button type="button" class="close" (click)="showModal = false">&times;</button>
+            </div>                               
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div *ngFor="let topic of allTopics" class="custom-control custom-checkbox">
+                    <input type="checkbox"
+                        class="custom-control-input"
+                        name="topics"
+                        value="{{topic.name}}"
+                        [(ngModel)]="topic.checked"
+                        (ngModelChange)="selectedTopics()"
+                        id="{{topic.name}}"/>
+                    <label class="custom-control-label" for="{{topic.name}}">{{topic.name}}</label>                                              
+                </div>
+            </div>                             
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <div class="custom-control custom-checkbox align-left">
+                    <input type="checkbox" class="custom-control-input" id="doNotShowAgain" [(ngModel)]="doNotShowAgain">
+                    <label class="custom-control-label" for="doNotShowAgain">Do not show this again</label>
+                </div>
+                <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="!doNotShowAgain && interestedTopics?.length === 0" (click)="closeModal()">Done</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" [disabled]="doNotShowAgain || interestedTopics?.length > 0" (click)="skipTopics()">Skip</button>
+            </div>                           
+        </div>
+    </div>
+</div>

@@ -36,6 +36,12 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
     this.topRankers = [{"uid": "123", "userName": "Michael", "school": "ABC", "grade": "5", "active": true},
                        {"uid": "456", "userName": "Michael1", "school": "DEF", "grade": "6", "active": false},
+                       {"uid": "789", "userName": "Michael2", "school": "GHI", "grade": "7", "active": true},
+                       {"uid": "123", "userName": "Michael", "school": "ABC", "grade": "5", "active": true},
+                       {"uid": "456", "userName": "Michael1", "school": "DEF", "grade": "6", "active": false},
+                       {"uid": "789", "userName": "Michael2", "school": "GHI", "grade": "7", "active": true},
+                       {"uid": "123", "userName": "Michael", "school": "ABC", "grade": "5", "active": true},
+                       {"uid": "456", "userName": "Michael1", "school": "DEF", "grade": "6", "active": false},
                        {"uid": "789", "userName": "Michael2", "school": "GHI", "grade": "7", "active": true}];
     }
 

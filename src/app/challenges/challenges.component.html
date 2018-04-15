@@ -33,18 +33,20 @@
                       </div>              
                     </div>
                     <br>
-                    <div *ngIf="topRankers?.length > 0">
-                      <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let topRanker of topRankers">
-                          <span class="badge rounded-circle kf-availability badge-pill" [ngClass]="topRanker.active ? 'badge-success' : 'badge-light'">&nbsp;</span>
-                          <span class="ml-2">{{topRanker.userName}}</span>
-                          <span class="ml-2">{{topRanker.school}}</span>
-                          <span class="ml-2">{{topRanker.grade}}</span>
-                          <a [routerLink]="" (click)="selectOpponent(topRanker)" class="ml-auto kf-challenge btn btn-sm btn-primary">
-                              Select
-                          </a>
-                        </li>
-                      </ul>
+                    <div id="searchResults">
+                      <div *ngIf="topRankers?.length > 0">
+                        <ul class="list-group">
+                          <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let topRanker of topRankers">
+                            <span class="badge rounded-circle kf-availability badge-pill" [ngClass]="topRanker.active ? 'badge-success' : 'badge-light'">&nbsp;</span>
+                            <span class="ml-2">{{topRanker.userName}}</span>
+                            <span class="ml-2">{{topRanker.school}}</span>
+                            <span class="ml-2">{{topRanker.grade}}</span>
+                            <a [routerLink]="" (click)="selectOpponent(topRanker)" class="ml-auto kf-challenge btn btn-sm btn-primary">
+                                Select
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                   <br>

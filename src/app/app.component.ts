@@ -21,8 +21,8 @@ export class AppComponent {
   subscribeUser(): void {
     let addUser = {
         type: "ADD_USER", 
-        uid: "1232123",
-        userName : "Md Azaz Akhtar",
+        uid: "4354657",
+        userName : "Anv akjlkjadf kadf",
         school: "Fermington",
         grade: "G5"
     };

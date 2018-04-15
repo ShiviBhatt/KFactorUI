@@ -4,3 +4,8 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+#searchResults {
+    max-height: 300px;
+    overflow-y: scroll;
+}
