@@ -10,13 +10,7 @@
             </div>
             <div class="card-body">
                 <h4 class="card-title">Topics of Interest</h4>
-                <span class="badge badge-success">Computer Science</span>
-                <span class="badge badge-success">General Knoledge</span>
-                <span class="badge badge-success">Current Affairs</span>
-                <span class="badge badge-success">Computer Programing</span>
-                <span class="badge badge-success">Biology</span>
-                <span class="badge badge-success">Music</span>
-                <span class="badge badge-success">Hollywood</span>
+                <span class="badge badge-success margin-right" *ngFor="let topic of topics">{{topic}}</span>
             </div>
         </div>
       </div>
@@ -109,32 +103,12 @@
                   <div class="tab-content">
                       <div id="topRankers" class="container tab-pane active"><br>
                           <ul class="list-group">
-                              <li class="list-group-item d-flex justify-content-between align-items-center">
-                                  <span class="badge rounded-circle kf-availability badge-success badge-pill">&nbsp;</span>
-                                  <span class="ml-2">Michel Ben</span>
-                                  <span class="ml-2">ABC School</span>
-                                  <span class="ml-2">5th Grade</span>
-                                  <a [routerLink]="" (click)="goToChallenge('Michel Ben')" class="ml-auto kf-challenge btn btn-sm btn-primary">
-                                      <i class="fa fa-bolt"></i>
-                                      Challenge
-                                  </a>
-                              </li>
-                              <li class="list-group-item d-flex justify-content-between align-items-center">
-                                  <span class="badge rounded-circle kf-availability badge-light badge-pill">&nbsp;</span>
-                                  <span class="ml-2">Michel Ben</span>
-                                  <span class="ml-2">ABC School</span>
-                                  <span class="ml-2">5th Grade</span>
-                                  <a [routerLink]="" (click)="goToChallenge()" class="ml-auto kf-challenge btn btn-sm btn-primary">
-                                      <i class="fa fa-bolt"></i>
-                                      Challenge
-                                  </a>
-                              </li>
-                              <li class="list-group-item d-flex justify-content-between align-items-center">
-                                  <span class="badge rounded-circle kf-availability badge-light badge-pill">&nbsp;</span>
-                                  <span class="ml-2">Michel Ben</span>
-                                  <span class="ml-2">ABC School</span>
-                                  <span class="ml-2">5th Grade</span>
-                                  <a [routerLink]="" (click)="goToChallenge('Michel Ben')" class="ml-auto kf-challenge btn btn-sm btn-primary">
+                              <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let topRanker of topRankers">
+                                  <span class="badge rounded-circle kf-availability badge-pill" [ngClass]="topRanker.active ? 'badge-success' : 'badge-light'">&nbsp;</span>
+                                  <span class="ml-2">{{topRanker.userName}}</span>
+                                  <span class="ml-2">{{topRanker.school}}</span>
+                                  <span class="ml-2">{{topRanker.grade}}</span>
+                                  <a [routerLink]="" (click)="goToChallenge(topRanker)" class="ml-auto kf-challenge btn btn-sm btn-primary">
                                       <i class="fa fa-bolt"></i>
                                       Challenge
                                   </a>
@@ -143,32 +117,12 @@
                       </div>
                       <div id="activeUsers" class="container tab-pane fade"><br>
                           <ul class="list-group">
-                              <li class="list-group-item d-flex justify-content-between align-items-center">
+                              <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let activeUser of activeUsers">
                                   <span class="badge rounded-circle kf-availability badge-success badge-pill">&nbsp;</span>
-                                  <span class="ml-2">Sam</span>
-                                  <span class="ml-2">EFG School</span>
-                                  <span class="ml-2">9th Grade</span>
-                                  <a [routerLink]="" (click)="goToChallenge('Sam')" class="ml-auto kf-challenge btn btn-sm btn-primary">
-                                      <i class="fa fa-bolt"></i>
-                                      Challenge
-                                  </a>
-                              </li>
-                              <li class="list-group-item d-flex justify-content-between align-items-center">
-                                  <span class="badge rounded-circle kf-availability badge-success badge-pill">&nbsp;</span>
-                                  <span class="ml-2">Sam</span>
-                                  <span class="ml-2">EFG School</span>
-                                  <span class="ml-2">9th Grade</span>
-                                  <a [routerLink]="" (click)="goToChallenge('Sam')" class="ml-auto kf-challenge btn btn-sm btn-primary">
-                                      <i class="fa fa-bolt"></i>
-                                      Challenge
-                                  </a>
-                              </li>
-                              <li class="list-group-item d-flex justify-content-between align-items-center">
-                                  <span class="badge rounded-circle kf-availability badge-success badge-pill">&nbsp;</span>
-                                  <span class="ml-2">Sam</span>
-                                  <span class="ml-2">EFG School</span>
-                                  <span class="ml-2">9th Grade</span>
-                                  <a [routerLink]="" (click)="goToChallenge('Sam')" class="ml-auto kf-challenge btn btn-sm btn-primary">
+                                  <span class="ml-2">{{activeUser.userName}}</span>
+                                  <span class="ml-2">{{activeUser.school}}</span>
+                                  <span class="ml-2">{{activeUser.grade}}</span>
+                                  <a [routerLink]="" (click)="goToChallenge(activeUser)" class="ml-auto kf-challenge btn btn-sm btn-primary">
                                       <i class="fa fa-bolt"></i>
                                       Challenge
                                   </a>

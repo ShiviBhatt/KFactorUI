@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HomeService } from './homeService';
 import { Subscription } from 'rxjs/Subscription';
 import { SocketService } from '../socket.service';
+import { topics } from '../challenges/topics';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,10 @@ export class HomeComponent implements OnInit {
 
   chart: any;
   socket: any;
-  subscription: Subscription
+  subscription: Subscription;
+  topRankers: any;
+  activeUsers: any;
+  topics: Array<string>;
 
   @ViewChild('sdChart')
   sdChart: ElementRef;
@@ -27,7 +31,15 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.topRankers = [{"uid": "123", "userName": "Michael", "school": "ABC", "grade": "5", "active": true},
+                       {"uid": "456", "userName": "Michael1", "school": "DEF", "grade": "6", "active": false},
+                       {"uid": "789", "userName": "Michael2", "school": "GHI", "grade": "7", "active": true}];
 
+    this.activeUsers = [{"uid": "147", "userName": "Sam", "school": "ABC", "grade": "5"},
+                        {"uid": "741", "userName": "Sam1", "school": "DEF", "grade": "6"},
+                        {"uid": "234", "userName": "Sam2", "school": "GHI", "grade": "7"}];
+
+    this.topics = topics.topics;
   }
 
   goToChallenge(user: string): void {

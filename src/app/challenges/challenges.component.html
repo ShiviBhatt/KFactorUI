@@ -11,39 +11,65 @@
                   </li>
               </ul>
               <div class="tab-content">
-                <div id="createChallenge" class="container tab-pane active"><br>
-                  <label for="topic">Grade: {{selectedGrade}}</label>
-                  <select class="form-control" id="grade" [ngModel]="selectedGrade" (ngModelChange)="gradeChange($event)">
-                    <option>ALL</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                  </select>
-                  <form class="form-inline my-2 my-lg-0" *ngIf="!user">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-                  </form><br>
-                  <div class="form-group" *ngIf="user">
-                    <input [disabled]="true" placeholder="User Name" class="form-control mr-sm-2" type="text" [ngModel]="user">
+                <div id="createChallenge" class="container tab-pane active">
+                  <div *ngIf="!hideSearch">
+                    <h5 id="searchOpponent">Search for opponent</h5>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label for="grade">Grade: <b>{{selectedGrade}}</b></label>
+                        <select class="form-control" id="grade" [ngModel]="selectedGrade" (ngModelChange)="gradeChange($event)">
+                            <option *ngFor="let grade of grades">{{grade}}</option>
+                        </select>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="school">School: <b>{{selectedSchool}}</b></label>
+                        <select class="form-control" id="school" [ngModel]="selectedSchool" (ngModelChange)="schoolChange($event)">
+                          <option *ngFor="let school of schools">{{school}}</option>
+                        </select>
+                      </div>
+                      <div class="col-md-4">
+                        <label>Username:</label>
+                        <input class="form-control mr-sm-2" type="text" placeholder="Enter starting characters of username" [ngModel]="userName" (ngModelChange)="userNameChange($event)">
+                      </div>              
+                    </div>
+                    <br>
+                    <div *ngIf="topRankers?.length > 0">
+                      <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let topRanker of topRankers">
+                          <span class="badge rounded-circle kf-availability badge-pill" [ngClass]="topRanker.active ? 'badge-success' : 'badge-light'">&nbsp;</span>
+                          <span class="ml-2">{{topRanker.userName}}</span>
+                          <span class="ml-2">{{topRanker.school}}</span>
+                          <span class="ml-2">{{topRanker.grade}}</span>
+                          <a [routerLink]="" (click)="selectOpponent(topRanker)" class="ml-auto kf-challenge btn btn-sm btn-primary">
+                              Select
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                  <div class="form-group" *ngIf="user">
-                    <label for="topic">Topic:</label>
-                    <select class="form-control" id="topic" [ngModel]="selectedTopic" (ngModelChange)="topicChange($event)">
-                      <option>Computer Science</option>
-                      <option>History</option>
-                      <option>Sports</option>
-                      <option>Science</option>
-                      <option>General Knowledge</option>
-                      <option>Music</option>
-                      <option>Hollywood</option>
-                    </select>
-                  </div>
-                  <div class="form-group" *ngIf="user">
-                    <button class="btn btn-success my-2 my-sm-0" type="submit" (click)="createChallenge()">Submit Challenge</button>
+                  <br>
+                  <div *ngIf="user">
+                    <div class="form-group">
+                      <label>Username:</label>
+                      <input [disabled]="true" placeholder="User Name" class="form-control mr-sm-2" type="text" [ngModel]="user.userName">
+                    </div>
+                    <div class="form-group">
+                      <label>School:</label>
+                      <input [disabled]="true" placeholder="School" class="form-control mr-sm-2" type="text" [ngModel]="user.school">
+                    </div>
+                    <div class="form-group">
+                      <label>Grade:</label>
+                      <input [disabled]="true" placeholder="Grade" class="form-control mr-sm-2" type="text" [ngModel]="user.grade">
+                    </div>
+                    <div class="form-group">
+                      <label for="topic">Topic:</label>
+                      <select class="form-control" id="topic" [ngModel]="selectedTopic" (ngModelChange)="topicChange($event)">
+                        <option *ngFor="let topic of topics">{{topic}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <button class="btn btn-success my-2 my-sm-0" type="submit" (click)="createChallenge()">Submit Challenge</button>
+                    </div>
                   </div>
                 </div>
                 <div id="allChallenges" class="container tab-pane fade"><br>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { topics } from '../challenges/topics';
 
 @Component({
     selector: 'user-profile',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit{
     user: User;
-    topics: Array<Topic>;
+    topics: Array<Topic> = [];
     selectedTopics: Array<string>;
 
     ngOnInit(): void {
@@ -20,15 +21,9 @@ export class ProfileComponent implements OnInit{
             topics: ''
         };
 
-        this.topics = [
-            {name:'Computer Science', value:'Computer Science', checked:false},
-            {name:'General Knowledge', value:'General Knowledge', checked:false},
-            {name:'Science', value:'Science', checked:false},
-            {name:'History', value:'History', checked:false},
-            {name:'Music', value:'Music', checked:false},
-            {name:'Hollywood', value:'Hollywood', checked:false},
-            {name:'Sports', value:'Sports', checked:false}
-        ];
+        topics.topics.forEach((topic) => {
+            this.topics.push({name: topic, checked: false});
+        });
     }
 
     saveUserDetails(): void {
@@ -38,7 +33,7 @@ export class ProfileComponent implements OnInit{
     selectedOptions(): void {
         this.selectedTopics = this.topics
             .filter(topic => topic.checked)
-            .map(topic => topic.value);
+            .map(topic => topic.name);
         this.user.topics = this.selectedTopics.join(', ');
     }
 }
@@ -54,6 +49,5 @@ export interface User {
 
 export interface Topic {
     name: string;
-    value: string;
     checked: boolean;
 }

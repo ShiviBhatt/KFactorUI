@@ -1,3 +1,3 @@
 export class HomeService {
-    public user: string;
+    public user: any;
 }
