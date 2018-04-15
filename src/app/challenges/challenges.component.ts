@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeService } from '../home/homeService';
 
 @Component({
   selector: 'app-challenges',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChallengesComponent implements OnInit {
 
-  constructor() { }
+  user: string;
+  selectedTopic: string;
+
+  constructor(private homeService: HomeService) { }
 
   ngOnInit() {
+    this.user = this.homeService.user;
+    this.selectedTopic = 'History';
   }
 
+  topicChange(event): void {
+    this.selectedTopic = event;
+  }
+
+  createChallenge(): void {
+    console.log(this.user);
+    console.log(this.selectedTopic);
+  }
 }

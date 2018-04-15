@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ export class HeaderComponent implements OnInit {
   userMenus: KFMenu[];
   notifications: KFNotification[];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.userMenus = [
@@ -48,6 +49,12 @@ export class HeaderComponent implements OnInit {
 
   handleNotification(notification: KFNotification): void {
     notification.hasRead = true;
+  }
+
+  userMenuNavigation(userMenu: KFMenu): void {
+    if (userMenu.id === 'profile') {
+      this.router.navigate(['/profile']);
+    }
   }
 
 }

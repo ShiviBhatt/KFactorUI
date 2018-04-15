@@ -1,0 +1,84 @@
+<div class="row">
+    <div class="col-md-2" id="userDetails">
+        <div class="card bg-light mb-2">
+            <div class="kf-card-top">
+                <i class="fa fa-user bg-primary"></i>
+            </div>
+            <p class="mb-4" id="user">Sam Andrew</p>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="card bg-light mb-9">
+            <div class="card-body">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill" href="#profile">Profile</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="profile" class="container tab-pane active">
+                        <form id="userProfile">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" class="form-control" id="firstName" [ngModel]="user.firstName" name="firstName" [disabled]=true>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" [ngModel]="user.lastName" name="lastName" [disabled]=true>
+                            </div>
+                            <div class="form-group">
+                                <label for="school">School</label>
+                                <input type="text" class="form-control" id="school" [ngModel]="user.school" name="school" [disabled]=true>
+                            </div>
+                            <div class="form-group">
+                                <label for="grade">Grade</label>
+                                <input type="text" class="form-control" id="grade" [ngModel]="user.grade" name="grade" [disabled]=true>
+                            </div>
+                            <div class="form-group">
+                                <label for="userName">Username</label>
+                                <input type="text" class="form-control" id="userName" name="userName" [(ngModel)]="user.userName">
+                            </div>
+                            <div class="form-group">
+                                <label for="topics">Topics of interest</label>
+                                <span>
+                                    <input type="text" class="form-control d-inline" id="topics" name="topics" [(ngModel)]="user.topics" [disabled]=true>
+                                    <i class="fa fa-edit" data-toggle="modal" data-target="#myModal" id="editIcon"></i>
+                                    <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"></button>-->
+                                </span>
+                            </div>
+                            <button type="submit" (click)="saveUserDetails()" class="btn btn-primary">Save</button>
+                        </form>
+                        <div class="modal fade" id="myModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">                           
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Select Topics</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>                               
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <div *ngFor="let topic of topics" class="custom-control custom-checkbox">
+                                            <input type="checkbox"
+                                                class="custom-control-input"
+                                                name="topics"
+                                                value="{{topic.value}}"
+                                                [(ngModel)]="topic.checked"
+                                                id="{{topic.value}}"/>
+                                            <label class="custom-control-label" for="{{topic.value}}">{{topic.name}}</label>                                              
+                                        </div>
+                                    </div>                             
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="selectedOptions()">Save</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div>                           
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>

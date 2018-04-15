@@ -5,6 +5,7 @@ import { ChallengesComponent } from './challenges/challenges.component';
 import { BoardComponent } from './board/board.component';
 import { PlaygroundComponent } from './playground/playground.component';
 import { ChallengeViewerComponent } from './challenge-viewer/challenge-viewer.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'challenges/:id', component: ChallengeViewerComponent },
   { path: 'challenges/:id/start', component: PlaygroundComponent },
   { path: 'board', component: BoardComponent },
+  { path: 'profile', component: ProfileComponent }
 ];
 
 @NgModule({
