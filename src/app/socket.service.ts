@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class SocketService {
 
+  socket: any;
+
   subject = new Subject<any>();
 
   constructor() { }

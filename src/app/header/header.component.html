@@ -33,6 +33,7 @@
           data-toggle="dropdown" 
           href="javascript:;;" role="button" 
           aria-haspopup="true" 
+          [ngClass]="{'disabled': getUnreadNotification().length == 0}"
           aria-expanded="false">
           <span *ngIf="getUnreadNotification().length > 0" 
             class="badge badge-danger kf-count">
@@ -43,7 +44,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right" 
           x-placement="bottom-start">
-          <p class="ml-3">You have {{getUnreadNotification().length}} unread notifications</p>
+          <p class="ml-3 kf-notice-msg">You have {{getUnreadNotification().length}} unread notifications</p>
           <div class="kf-noticeboard">
             <a class="dropdown-item" 
               [routerLink]="['challenges', notification.id]"

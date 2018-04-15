@@ -40,11 +40,11 @@ export class AppComponent {
     });
 
     this.socket.on('error', msg => {
-      debugger;
+      
     });
 
     this.socket.on('disconnect', msg => {
-      debugger;
+      
     });
 
   }

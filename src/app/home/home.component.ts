@@ -22,16 +22,21 @@ export class HomeComponent implements OnInit {
   showModal: boolean = false;
   allTopics: any = [];
   doNotShowAgain: boolean = false;
+  loggedInUser: any = { uid: '1232123' };
 
   @ViewChild('sdChart')
   sdChart: ElementRef;
 
   constructor(private router: Router, private homeService: HomeService, private socketService: SocketService) {
     this.subscription = this.socketService.getData().subscribe(msg => {
-        if (msg.type == 'C_NOTIFY') {
-            
+        if (msg.type == 'ACTIVE_USERS') {
+            this.activeUsers = this.getOtherActiveUsers(msg.data);
         }
     });
+  }
+
+  getOtherActiveUsers(allActiveUser: Array<any>): Array<any> {
+    return allActiveUser.filter(activeUser => activeUser.uid != this.loggedInUser.uid);
   }
 
   ngOnInit() {
@@ -39,9 +44,9 @@ export class HomeComponent implements OnInit {
                        {"uid": "456", "userName": "Michael1", "school": "DEF", "grade": "6", "active": false},
                        {"uid": "789", "userName": "Michael2", "school": "GHI", "grade": "7", "active": true}];
 
-    this.activeUsers = [{"uid": "147", "userName": "Sam", "school": "ABC", "grade": "5"},
+    this.activeUsers = [/*{"uid": "147", "userName": "Sam", "school": "ABC", "grade": "5"},
                         {"uid": "741", "userName": "Sam1", "school": "DEF", "grade": "6"},
-                        {"uid": "234", "userName": "Sam2", "school": "GHI", "grade": "7"}];
+  {"uid": "234", "userName": "Sam2", "school": "GHI", "grade": "7"}*/];
 
     this.topics = topics.topics;
     this.topics.forEach((topic) => {

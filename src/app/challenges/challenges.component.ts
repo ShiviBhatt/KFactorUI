@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HomeService } from '../home/homeService';
 import { topics } from './topics';
+import { SocketService } from '../socket.service';
 
 @Component({
   selector: 'app-challenges',
@@ -20,7 +21,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
   topRankers: any;
   hideSearch: boolean = false;
 
-  constructor(private homeService: HomeService) { }
+  constructor(private homeService: HomeService, private socketService: SocketService) { }
 
   ngOnInit() {
     this.user = this.homeService.user;
@@ -73,5 +74,13 @@ export class ChallengesComponent implements OnInit, OnDestroy {
   createChallenge(): void {
     console.log(this.user);
     console.log(this.selectedTopic);
+    let challenge = {
+      type: "C_REQ",
+      uid: '1232123',
+      opponentuid: this.user.uid,
+      topic: this.selectedTopic,
+      is_live: true
+    };
+    this.socketService.socket.emit('message', challenge);
   }
 }
