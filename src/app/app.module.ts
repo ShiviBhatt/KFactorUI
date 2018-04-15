@@ -29,7 +29,8 @@ import { HomeService } from './home/homeService';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     DataService,

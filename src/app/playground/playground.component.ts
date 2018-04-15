@@ -47,7 +47,7 @@ export class PlaygroundComponent implements OnInit {
   restUrls: any;
   selfScoreBoard: KFScoreBoard;
   opponentScoreBoard: KFScoreBoard;
-  timer: NodeJS.Timer;
+  timer: any;
 
   constructor(private dataService: DataService) {
     this.restUrls = dataService.getRestUrls();
@@ -59,7 +59,7 @@ export class PlaygroundComponent implements OnInit {
     this.verifyAnswer();
   }
 
-  startCountDown(onTimeup: Function):  NodeJS.Timer {
+  startCountDown(onTimeup: Function):  any {
     this.remainingTime = 10; 
     let timer = setInterval(() => {
       this.remainingTime--;
