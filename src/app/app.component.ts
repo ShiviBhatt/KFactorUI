@@ -14,6 +14,7 @@ export class AppComponent {
   
   constructor(private socketService: SocketService) {
     this.socket = io.connect('http://172.30.0.144:3000');
+    this.socketService.socket = this.socket;
     this.initWebsocketHandlers();
     this.subscribeUser();
   }
