@@ -12,6 +12,7 @@ export class SocketService {
   otherUser: any;
 
   selfStatus: any;
+  userUid: string;
 
   subject = new Subject<any>();
 

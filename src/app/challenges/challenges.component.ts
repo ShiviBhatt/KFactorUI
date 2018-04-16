@@ -3,6 +3,7 @@ import { HomeService } from '../home/homeService';
 import { topics } from './topics';
 import { SocketService } from '../socket.service';
 import { MockDataService } from '../mock-data.service';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-challenges',
@@ -16,36 +17,41 @@ export class ChallengesComponent implements OnInit, OnDestroy {
   userName: string;
   selectedGrade: string;
   selectedSchool: string;
-  grades: Array<string>;
-  schools: Array<string>;
+  grades: Array<string> = [];
+  schools: Array<string> = [];
   topics: Array<string>;
-  topRankers: any;
+  allUsers: any;
   hideSearch: boolean = false;
 
-  constructor(private homeService: HomeService, private socketService: SocketService, private mockDataService: MockDataService) { }
+  constructor(private homeService: HomeService, private socketService: SocketService,
+              private dataService: DataService, private mockDataService: MockDataService) { }
 
   ngOnInit() {
     this.user = this.homeService.user;
     if (this.user) {
       this.hideSearch = true;
     }
-    this.selectedGrade = 'ALL';
-    this.selectedSchool = 'ALL';
-    this.grades = ['ALL', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5'];
-    this.schools = ['ALL', 'ABC', 'EFG', 'MNO', 'RST'];
-    this.topics = topics.topics;
-    this.selectedTopic = this.topics[0];
 
-    this.topRankers = [{"uid": "123", "userName": "Michael", "school": "ABC", "grade": "5", "active": true},
-                       {"uid": "456", "userName": "Michael1", "school": "DEF", "grade": "6", "active": false},
-                       {"uid": "789", "userName": "Michael2", "school": "GHI", "grade": "7", "active": true},
-                       {"uid": "123", "userName": "Michael", "school": "ABC", "grade": "5", "active": true},
-                       {"uid": "456", "userName": "Michael1", "school": "DEF", "grade": "6", "active": false},
-                       {"uid": "789", "userName": "Michael2", "school": "GHI", "grade": "7", "active": true},
-                       {"uid": "123", "userName": "Michael", "school": "ABC", "grade": "5", "active": true},
-                       {"uid": "456", "userName": "Michael1", "school": "DEF", "grade": "6", "active": false},
-                       {"uid": "789", "userName": "Michael2", "school": "GHI", "grade": "7", "active": true}];
-    }
+    this.getUsers();
+  }
+
+  getUsers(): void {
+    this.dataService.getData('user').subscribe(res => {
+      this.allUsers = res;
+      this.allUsers.forEach((user) => {
+        this.grades.push(user.grade_name);
+        this.schools.push(user.school_name);
+      });
+      this.grades = this.grades.filter((value, index, self) => self.indexOf(value) === index);
+      this.schools = this.schools.filter((value, index, self) => self.indexOf(value) === index);
+      this.grades.sort();
+      this.schools.sort();
+      this.grades.unshift('ALL');
+      this.schools.unshift('ALL');
+      this.selectedGrade = this.grades[0];
+      this.selectedSchool = this.schools[0];
+    });
+  }
 
   ngOnDestroy() {
     this.homeService.user = '';
@@ -58,14 +64,30 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
   gradeChange(event): void {
     this.selectedGrade = event;
+    this.searchOpponents();
   }
 
   schoolChange(event): void {
     this.selectedSchool = event;
+    this.searchOpponents();
   }
 
   userNameChange(event): void {
     this.userName = event;
+    this.searchOpponents();
+  }
+
+  searchOpponents(): void {
+    let userName;
+    if (!this.userName || this.userName.trim() === '') {
+      userName = 'ALL';
+    } else {
+      userName = this.userName;
+    }
+    this.dataService.getData('user/filters/' + this.selectedGrade + '/' + this.selectedSchool + '/' + userName)
+      .subscribe((res) => {
+        this.allUsers = res;
+      });
   }
 
   selectOpponent(opponent): void {
@@ -73,10 +95,8 @@ export class ChallengesComponent implements OnInit, OnDestroy {
   }
 
   createChallenge(): void {
-    console.log(this.user);
-    console.log(this.selectedTopic);
     let challenge = {
-      type: "C_REQ",
+      type: 'C_REQ',
       uid: this.mockDataService.user.uid,
       opponentuid: this.user.uid,
       topic: this.selectedTopic,

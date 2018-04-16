@@ -72,7 +72,7 @@ export class DataService {
   }
 
   putData(url: string, data: any, urlParams?: string | number[], searchParams?: {}): Observable<any> {
-    return this.httpClient.get<any>(this.buildUrl(url, urlParams, searchParams), data);
+    return this.httpClient.put<any>(this.buildUrl(url, urlParams, searchParams), data);
   }
 
   deleteData(url: string, urlParams?: string | number[], searchParams?: {}): Observable<any> {

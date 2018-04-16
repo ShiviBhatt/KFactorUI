@@ -1,7 +1,7 @@
 {
     "domain": "localhost",
-    "port": "8082",
-    "appContext": "portal",
-    "restContext": "rest",
+    "port": "4444",
+    "appContext": "quizUp",
+    "restContext": "v1",
     "sslEnabled": false
 }

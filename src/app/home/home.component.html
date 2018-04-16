@@ -3,14 +3,14 @@
         <div class="card bg-light mb-4">
             <div class="kf-card-top">
                 <i class="fa fa-user bg-primary"></i>
-                <div class="kf-card-data pull-right">
-                    <p class="mb-0">Sam Andrew</p>
-                    <h4>19 Years</h4>
+                <div class="kf-card-data pull-right" *ngIf="userDetails">
+                    <h4>{{userDetails.firstName}} {{userDetails.lastName}}</h4>
+                    <h4>{{userDetails.age}} yrs</h4>
                 </div>
             </div>
             <div class="card-body">
                 <h4 class="card-title">Topics of Interest</h4>
-                <span class="badge badge-success margin-right" *ngFor="let topic of topics">{{topic}}</span>
+                <span class="badge badge-success margin-right" *ngFor="let topic of userStats?.topics">{{topic}}</span>
             </div>
         </div>
       </div>
@@ -21,21 +21,21 @@
                     <div class="kf-card-top">
                         <i class="fa fa-quora bg-info kf-small"></i>
                         <div class="kf-card-data pull-right">
-                            <p class="mb-0">Quizes</p>
-                            <h4>200</h4>
+                            <p class="mb-0">Quiz</p>
+                            <h4>{{userStats?.participated}}</h4>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="progress mb-2">
                             <div class="progress-bar bg-success" 
                                 role="progressbar" 
-                                style="width: 25%" 
-                                aria-valuenow="25" 
+                                [ngStyle]="{'width.%': userStats?.successRate}" 
+                                aria-valuenow="userStats?.successRate" 
                                 aria-valuemin="0" 
                                 aria-valuemax="100">
                             </div>
                         </div>
-                        <p class="mb-0 text-center">Success Rate (25%)</p>
+                        <p class="mb-0 text-center">Success Rate ({{userStats?.successRate}}%)</p>
                     </div>
                 </div>
             </div>
@@ -45,20 +45,20 @@
                         <i class="fa fa-arrow-up kf-small bg-success"></i>
                         <div class="kf-card-data pull-right">
                             <p class="mb-0">Win</p>
-                            <h4>77</h4>
+                            <h4>{{userStats?.win}}</h4>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="progress mb-2">
                             <div class="progress-bar bg-success" 
                                 role="progressbar" 
-                                style="width: 25%" 
-                                aria-valuenow="25" 
+                                [ngStyle]="{'width.%': userStats?.successRate}"  
+                                aria-valuenow="userStats?.successRate" 
                                 aria-valuemin="0" 
                                 aria-valuemax="100">
                             </div>
                         </div>
-                        <p class="mb-0 text-center">Success Rate (25%)</p>
+                        <p class="mb-0 text-center">Success Rate ({{userStats?.successRate}}%)</p>
                     </div>
                 </div>
             </div>
@@ -68,20 +68,20 @@
                         <i class="fa fa-arrow-down bg-danger kf-small"></i>
                         <div class="kf-card-data pull-right">
                             <p class="mb-0">Lose</p>
-                            <h4>123</h4>
+                            <h4>{{userStats?.loss}}</h4>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="progress mb-2">
                             <div class="progress-bar bg-success" 
                                 role="progressbar" 
-                                style="width: 25%" 
-                                aria-valuenow="25" 
+                                [ngStyle]="{'width.%': userStats?.successRate}" 
+                                aria-valuenow="userStats?.successRate" 
                                 aria-valuemin="0" 
                                 aria-valuemax="100">
                             </div>
                         </div>
-                        <p class="mb-0 text-center">Success Rate (25%)</p>
+                        <p class="mb-0 text-center">Success Rate ({{userStats?.successRate}}%)</p>
                     </div>
                 </div>
             </div>
@@ -105,9 +105,9 @@
                           <ul class="list-group">
                               <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let topRanker of topRankers">
                                   <span class="badge rounded-circle kf-availability badge-pill" [ngClass]="topRanker.active ? 'badge-success' : 'badge-light'">&nbsp;</span>
-                                  <span class="ml-2">{{topRanker.userName}}</span>
-                                  <span class="ml-2">{{topRanker.school}}</span>
-                                  <span class="ml-2">{{topRanker.grade}}</span>
+                                  <span class="ml-2">{{topRanker.user_name}}</span>
+                                  <span class="ml-2">{{topRanker.school_name}}</span>
+                                  <span class="ml-2">{{topRanker.grade_name}}</span>
                                   <a [routerLink]="" (click)="goToChallenge(topRanker)" class="ml-auto kf-challenge btn btn-sm btn-primary">
                                       <i class="fa fa-bolt"></i>
                                       Challenge
@@ -119,9 +119,9 @@
                           <ul class="list-group">
                               <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let activeUser of activeUsers">
                                   <span class="badge rounded-circle kf-availability badge-success badge-pill">&nbsp;</span>
-                                  <span class="ml-2">{{activeUser.userName}}</span>
-                                  <span class="ml-2">{{activeUser.school}}</span>
-                                  <span class="ml-2">{{activeUser.grade}}</span>
+                                  <span class="ml-2">{{activeUser.user_name}}</span>
+                                  <span class="ml-2">{{activeUser.school_name}}</span>
+                                  <span class="ml-2">{{activeUser.grade_name}}</span>
                                   <a [routerLink]="" (click)="goToChallenge(activeUser)" class="ml-auto kf-challenge btn btn-sm btn-primary">
                                       <i class="fa fa-bolt"></i>
                                       Challenge
@@ -140,7 +140,7 @@
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">Select Topics of Interest</h4>
-                <button type="button" class="close" (click)="showModal = false">&times;</button>
+                <button type="button" class="close" (click)="skipTopics()">&times;</button>
             </div>                               
             <!-- Modal body -->
             <div class="modal-body">

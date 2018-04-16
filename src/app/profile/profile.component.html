@@ -4,7 +4,7 @@
             <div class="kf-card-top">
                 <i class="fa fa-user bg-primary"></i>
             </div>
-            <p class="mb-4" id="user">Sam Andrew</p>
+            <p class="mb-4" id="user" *ngIf="userDetails">{{userDetails.firstName}} {{userDetails.lastName}}</p>
         </div>
     </div>
     <div class="col-md-9">
@@ -17,31 +17,31 @@
                 </ul>
                 <div class="tab-content">
                     <div id="profile" class="container tab-pane active">
-                        <form id="userProfile">
+                        <form id="userProfile" *ngIf="userDetails && userData">
                             <div class="form-group">
                                 <label for="firstName">First Name</label>
-                                <input type="text" class="form-control" id="firstName" [ngModel]="user.firstName" name="firstName" [disabled]=true>
+                                <input type="text" class="form-control" id="firstName" [ngModel]="userDetails.firstName" name="firstName" [disabled]=true>
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name</label>
-                                <input type="text" class="form-control" id="lastName" [ngModel]="user.lastName" name="lastName" [disabled]=true>
+                                <input type="text" class="form-control" id="lastName" [ngModel]="userDetails.lastName" name="lastName" [disabled]=true>
                             </div>
                             <div class="form-group">
                                 <label for="school">School</label>
-                                <input type="text" class="form-control" id="school" [ngModel]="user.school" name="school" [disabled]=true>
+                                <input type="text" class="form-control" id="school" [ngModel]="userDetails.schoolName" name="school" [disabled]=true>
                             </div>
                             <div class="form-group">
                                 <label for="grade">Grade</label>
-                                <input type="text" class="form-control" id="grade" [ngModel]="user.grade" name="grade" [disabled]=true>
+                                <input type="text" class="form-control" id="grade" [ngModel]="userDetails.gradeLevel" name="grade" [disabled]=true>
                             </div>
                             <div class="form-group">
                                 <label for="userName">Username</label>
-                                <input type="text" class="form-control" id="userName" name="userName" [(ngModel)]="user.userName">
+                                <input type="text" class="form-control" id="userName" name="username" [(ngModel)]="userData.user_name">
                             </div>
                             <div class="form-group">
                                 <label for="topics">Topics of interest</label>
                                 <span>
-                                    <input type="text" class="form-control d-inline" id="topics" name="topics" [(ngModel)]="user.topics" [disabled]=true>
+                                    <input type="text" class="form-control d-inline" id="topics" name="topics" [(ngModel)]="interestedTopics" [disabled]=true>
                                     <i class="fa fa-edit" data-toggle="modal" data-target="#myModal" id="editIcon"></i>
                                 </span>
                             </div>

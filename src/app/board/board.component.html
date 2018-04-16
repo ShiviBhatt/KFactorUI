@@ -11,18 +11,14 @@
                   </li>
               </ul>
               <div class="tab-content">
-                  <div id="leaderByWins" class="container tab-pane active"><br>
-                    <ul class="list-group">
-                      <li class="list-group-item d-flex">Sam - Wins 32</li>
-                      <li class="list-group-item d-flex">Peter - Wins 30</li>
-                      <li class="list-group-item d-flex">Henry - Wins 29</li>
+                  <div id="leaderByWins" class="container tab-pane active" *ngIf="leaderByWins.length > 0"><br>
+                    <ul class="list-group" *ngFor="let leader of leaderByWins">
+                      <li class="list-group-item d-flex">{{leader.user_name}} {{leader.school_name}} {{leader.grade_name}} - Wins: {{leader.challenges_won}}</li>
                     </ul>
                   </div>
-                  <div id="leaderByScore" class="container tab-pane fade"><br>
-                    <ul class="list-group">
-                      <li class="list-group-item d-flex">Sam - Score 846</li>
-                      <li class="list-group-item d-flex">Peter - Wins 820</li>
-                      <li class="list-group-item d-flex">Henry - Wins 812</li>
+                  <div id="leaderByScore" class="container tab-pane fade" *ngIf="leaderByScores.length > 0"><br>
+                    <ul class="list-group" *ngFor="let leader of leaderByScores">
+                      <li class="list-group-item d-flex">{{leader.user_name}} {{leader.school_name}} {{leader.grade_name}} - Score: {{leader.total_score}}</li>
                     </ul>
                   </div>
               </div>

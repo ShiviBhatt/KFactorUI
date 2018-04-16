@@ -34,14 +34,14 @@
                     </div>
                     <br>
                     <div id="searchResults">
-                      <div *ngIf="topRankers?.length > 0">
+                      <div *ngIf="allUsers?.length > 0">
                         <ul class="list-group">
-                          <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let topRanker of topRankers">
-                            <span class="badge rounded-circle kf-availability badge-pill" [ngClass]="topRanker.active ? 'badge-success' : 'badge-light'">&nbsp;</span>
-                            <span class="ml-2">{{topRanker.userName}}</span>
-                            <span class="ml-2">{{topRanker.school}}</span>
-                            <span class="ml-2">{{topRanker.grade}}</span>
-                            <a [routerLink]="" (click)="selectOpponent(topRanker)" class="ml-auto kf-challenge btn btn-sm btn-primary">
+                          <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let user of allUsers">
+                            <span class="badge rounded-circle kf-availability badge-pill" [ngClass]="user.active ? 'badge-success' : 'badge-light'">&nbsp;</span>
+                            <span class="ml-2">{{user.user_name}}</span>
+                            <span class="ml-2">{{user.school_name}}</span>
+                            <span class="ml-2">{{user.grade_name}}</span>
+                            <a [routerLink]="" (click)="selectOpponent(user)" class="ml-auto kf-challenge btn btn-sm btn-primary">
                                 Select
                             </a>
                           </li>
@@ -53,15 +53,15 @@
                   <div *ngIf="user">
                     <div class="form-group">
                       <label>Username:</label>
-                      <input [disabled]="true" placeholder="User Name" class="form-control mr-sm-2" type="text" [ngModel]="user.userName">
+                      <input [disabled]="true" placeholder="User Name" class="form-control mr-sm-2" type="text" [ngModel]="user.user_name">
                     </div>
                     <div class="form-group">
                       <label>School:</label>
-                      <input [disabled]="true" placeholder="School" class="form-control mr-sm-2" type="text" [ngModel]="user.school">
+                      <input [disabled]="true" placeholder="School" class="form-control mr-sm-2" type="text" [ngModel]="user.school_name">
                     </div>
                     <div class="form-group">
                       <label>Grade:</label>
-                      <input [disabled]="true" placeholder="Grade" class="form-control mr-sm-2" type="text" [ngModel]="user.grade">
+                      <input [disabled]="true" placeholder="Grade" class="form-control mr-sm-2" type="text" [ngModel]="user.grade_name">
                     </div>
                     <div class="form-group">
                       <label for="topic">Topic:</label>
@@ -85,9 +85,6 @@
                       <span>Sam has challenged you for a quiz on History</span>
                       <span class="ml-2"><button type="button" class="btn btn-success">Accept</button></span>
                       <span class="ml-2"><button type="button" class="btn btn-danger">Reject</button></span>
-                    </li>
-                    <li class="list-group-item d-flex align-items-center">
-                      <span>Sam had challenged you for a quiz on Sports</span>
                     </li>
                   </ul>
                 </div>

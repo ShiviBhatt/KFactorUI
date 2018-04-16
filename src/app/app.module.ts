@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,6 +17,7 @@ import { HomeService } from './home/homeService';
 import { SocketService } from './socket.service';
 import { MockDataService } from './mock-data.service';
 import { ChallengeCompleteComponent } from './challenge-complete/challenge-complete.component';
+import { AuthInterceptorService } from './auth-interceptor.service';
 
 
 @NgModule({
@@ -34,13 +36,19 @@ import { ChallengeCompleteComponent } from './challenge-complete/challenge-compl
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
   providers: [
     DataService,
     HomeService,
     SocketService,
-    MockDataService
+    MockDataService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

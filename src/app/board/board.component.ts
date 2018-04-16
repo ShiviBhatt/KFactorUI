@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-board',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardComponent implements OnInit {
 
-  constructor() { }
+  leaderByWins: Array<any> = [];
+  leaderByScores: Array<any> = [];
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.getLeaderByWins();
+    this.getLeaderByScores();
+  }
+
+  getLeaderByWins(): void {
+    this.dataService.getData('leaderboardByWins')
+      .subscribe((res) => {
+        this.leaderByWins = res;
+      });
+  }
+
+  getLeaderByScores(): void {
+    this.dataService.getData('leaderboardByScores')
+      .subscribe((res) => {
+        this.leaderByScores = res;
+      });
   }
 
 }

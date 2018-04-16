@@ -20,17 +20,31 @@ export class AppComponent {
     this.socketService.socket = this.socket;
     this.initWebsocketHandlers();
     this.subscribeUser();
+    if (!localStorage.getItem('uid')) {
+      localStorage.setItem('uid', this.getParameterByName('uid', undefined));
+      localStorage.setItem('token', this.getParameterByName('token', undefined));
+    }
   }
 
   subscribeUser(): void {
     let subscribeRequest = {
-        type: "ADD_USER", 
+        type: 'ADD_USER',
         uid: this.mockDataService.user.uid,
         userName : this.mockDataService.user.userName,
         school: this.mockDataService.user.school,
         grade: this.mockDataService.user.grade
     };
     this.socket.emit('open', subscribeRequest);
+  }
+
+  getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
 
   initWebsocketHandlers(): void {
