@@ -86,6 +86,11 @@ export class HomeComponent implements OnInit {
     this.dataService.getData('user/UC/'+ localStorage.getItem('uid'))
       .subscribe((userData) => {
         this.userDetails = userData;
+        this.mockDataServie.user.uid = localStorage.getItem('uid');
+        this.mockDataServie.user.grade = this.userDetails.gradeLevel;
+        this.mockDataServie.user.school = this.userDetails.schoolName;
+        this.mockDataServie.user.userName = this.userDetails.firstName;
+        console.log(this.mockDataServie);
         this.userDetails.age =  new Date().getFullYear() - new Date(this.userDetails.dateOfBirth).getFullYear();
         this.checkUserExists();
       });
