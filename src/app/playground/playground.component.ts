@@ -76,8 +76,12 @@ export class PlaygroundComponent implements OnInit {
               this.verifyAnswer(prevAns);
             }
             if (question) {
-              this.currentQuestion = question;
-              this.runTest();
+              setTimeout((attemptedQuesCount) => {
+                this.currentQuestion = question;
+                this.attemptedQuesCount = attemptedQuesCount + 1;
+                this.selectedOption = null;
+                this.runTest();
+              }, 1000, this.attemptedQuesCount);
             }
         } else if (msg.type == 'CC_RESP') {
           this.goToChallengeCompete();
@@ -117,28 +121,24 @@ export class PlaygroundComponent implements OnInit {
       } else {
         this.selectedOption.isLocked = false;
         this.selectedOption.isCorrect = false;
-      }
-      this.selectedOption = null;
+      };
     }
     this.opponentScoreBoard.totalScore += parseInt(correctOption.scores[this.socketService.otherUser.uid]);
   }
 
   runTest() {
-    this.attemptedQuesCount++;
     this.timer = this.startCountDown(() => {
-      setTimeout(() => {
-        this.requestNextQuestion();
-      }, 2000);
+      this.requestNextQuestion();
     });
   }
 
-  chooseOption(option: KFOption): void {
-    if (this.selectedOption != null) {
+  chooseOption(option: KFOption): boolean {
+    if (this.selectedOption) {
       return;
     }
-    clearInterval(this.timer);
     option.isLocked = true;
     this.selectedOption = option;
+    clearInterval(this.timer);
     this.requestNextQuestion();
   }
 
@@ -163,7 +163,8 @@ export class PlaygroundComponent implements OnInit {
   }
 
   requestNextQuestion() {
-    if (this.attemptedQuesCount < 6) {
+    console.log(this.attemptedQuesCount);
+    if (this.attemptedQuesCount < 5) {
       let caReq = {
         type: 'A_REQ',
         challengeId: this.challengeId,
@@ -176,7 +177,6 @@ export class PlaygroundComponent implements OnInit {
       };
       this.socketService.socket.emit('message', caReq);
     } else {
-      debugger;
       let ccReq = {
         type: "CC_REQ",
         challengeId: this.challengeId,
