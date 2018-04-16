@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col">
+      <div *ngIf="wins == true" class="card bg-light mb-4">
+          <div class="card-body text-center">
+              <img style="width: 100%; height: 100%;" src="assets/images/youwon.jpg" />
+          </div>
+      </div>
+      <div *ngIf="wins == false" class="card bg-light mb-4">
+          <div class="card-body text-center">
+              <img style="width: 100%; height: 100%;" src="assets/images/youloose.jpg" />
+          </div>
+      </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>

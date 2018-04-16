@@ -14,6 +14,8 @@ import { ChallengeViewerComponent } from './challenge-viewer/challenge-viewer.co
 import { ProfileComponent } from './profile/profile.component';
 import { HomeService } from './home/homeService';
 import { SocketService } from './socket.service';
+import { MockDataService } from './mock-data.service';
+import { ChallengeCompleteComponent } from './challenge-complete/challenge-complete.component';
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { SocketService } from './socket.service';
     BoardComponent,
     PlaygroundComponent,
     ChallengeViewerComponent,
-    ProfileComponent
+    ProfileComponent,
+    ChallengeCompleteComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { SocketService } from './socket.service';
   providers: [
     DataService,
     HomeService,
-    SocketService
+    SocketService,
+    MockDataService
   ],
   bootstrap: [AppComponent]
 })

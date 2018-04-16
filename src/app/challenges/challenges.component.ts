@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HomeService } from '../home/homeService';
 import { topics } from './topics';
 import { SocketService } from '../socket.service';
+import { MockDataService } from '../mock-data.service';
 
 @Component({
   selector: 'app-challenges',
@@ -21,7 +22,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
   topRankers: any;
   hideSearch: boolean = false;
 
-  constructor(private homeService: HomeService, private socketService: SocketService) { }
+  constructor(private homeService: HomeService, private socketService: SocketService, private mockDataService: MockDataService) { }
 
   ngOnInit() {
     this.user = this.homeService.user;
@@ -76,11 +77,15 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     console.log(this.selectedTopic);
     let challenge = {
       type: "C_REQ",
-      uid: '1232123',
+      uid: this.mockDataService.user.uid,
       opponentuid: this.user.uid,
       topic: this.selectedTopic,
+      userName: this.mockDataService.user.userName,
+      opponentName: this.user.userName,
       is_live: true
     };
+    this.socketService.otherUser.uid = this.user.uid;
+    this.socketService.otherUser.userName = this.user.userName;
     this.socketService.socket.emit('message', challenge);
   }
 }

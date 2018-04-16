@@ -1,2 +1,8 @@
-<a [routerLink]="['../../home']" class="btn btn-outline-danger">Reject</a>
-<a [routerLink]="['start']" class="btn btn-outline-success">Accept</a>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col">
+        <a href="javascript:;;" (click)="acceptChallenge()" class="btn btn-outline-success">Accept</a>
+        <a [routerLink]="['../../home']" class="btn btn-outline-danger">Reject</a>
+    </div>
+    <div class="col-md-4"></div>
+</div>

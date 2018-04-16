@@ -19,9 +19,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private socketService: SocketService) {
     this.subscription = this.socketService.getData().subscribe(msg => {
       if (msg.type == 'C_NOTIFY') {
-        this.notifications = msg.data;
+        this.notifications = this.buildNotification(msg.data);
       }
     });
+  }
+
+  buildNotification(notificationData: Array<any>): Array<any> {
+    let notifications = [];
+    for (let i = 0; i < notificationData.length; i++) {
+      notifications.push({
+        id: notificationData[i].challengeId,
+        title: notificationData[i].challengedBy.userName + ' challenged you on ' + notificationData[i].topic
+      });
+      this.socketService.ctMap[notificationData[i].challengeId] = notificationData[i].topic;
+      this.socketService.otherUser.uid = notificationData[i].challengedBy.uid;
+      this.socketService.otherUser.userName = notificationData[i].challengedBy.userName;
+    }
+    return notifications;
   }
 
   ngOnDestroy() {

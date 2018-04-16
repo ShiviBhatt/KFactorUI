@@ -7,9 +7,25 @@ export class SocketService {
 
   socket: any;
 
+  ctMap: any;
+
+  otherUser: any;
+
+  selfStatus: any;
+
   subject = new Subject<any>();
 
-  constructor() { }
+  constructor() {
+    this.ctMap = {
+
+    };
+    this.otherUser = {
+
+    }
+    this.selfStatus = {
+      
+    }
+  }
 
   sendData(data: any) {
     this.subject.next(data)
