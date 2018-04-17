@@ -11,13 +11,23 @@ export class DataService {
   serverConfig: any = serverConfig;
   restUrls: any = restUrls;
   baseUrl: string;
+  socketServerBaseUrl: any;
 
   constructor(private httpClient: HttpClient) {
     this.baseUrl = this.buildBaseUrl();
+    this.socketServerBaseUrl = "http://" + this.serverConfig.socketServerDomain + ":" + this.serverConfig.socketServerPort;
   }
 
   getRestUrls(): any {
     return this.restUrls;
+  }
+
+  getBaseUrl(): string {
+    return this.baseUrl;
+  }
+ 
+  getSocketServerBaseUrl(): string {
+    return this.socketServerBaseUrl;
   }
 
   buildBaseUrl(): string {

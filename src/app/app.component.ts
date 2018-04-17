@@ -3,6 +3,7 @@ import * as io  from 'socket.io-client';
 import { SocketService } from './socket.service';
 import { MockDataService } from './mock-data.service';
 import { Router } from '@angular/router';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,9 @@ export class AppComponent {
   socket: any;
   navigated: boolean = false;
   
-  constructor(private socketService: SocketService, private mockDataService: MockDataService, private router: Router) {
-    this.socket = io.connect('http://172.30.0.144:3000');
+  constructor(private socketService: SocketService, private mockDataService: MockDataService,
+              private router: Router, private dataService: DataService) {
+    this.socket = io.connect(this.dataService.getSocketServerBaseUrl());
     this.socketService.socket = this.socket;
     this.initWebsocketHandlers();
     this.subscribeUser();

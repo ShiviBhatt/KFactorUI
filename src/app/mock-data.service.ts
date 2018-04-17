@@ -7,10 +7,10 @@ export class MockDataService {
 
   constructor() {
     this.user = {
-      uid: '12345',
-      userName: 'pinku',
-      school: 'Mount Desert High School',
-      grade: '5E'
+      uid: '11E8325A-E87A-BDE3-8FD9-010011AC0000',
+      userName: 'Arthur',
+      school: 'Arkham Asylum',
+      grade: '7'
     };
   }
 

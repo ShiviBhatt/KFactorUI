@@ -119,9 +119,9 @@
                           <ul class="list-group">
                               <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let activeUser of activeUsers">
                                   <span class="badge rounded-circle kf-availability badge-success badge-pill">&nbsp;</span>
-                                  <span class="ml-2">{{activeUser.user_name}}</span>
-                                  <span class="ml-2">{{activeUser.school_name}}</span>
-                                  <span class="ml-2">{{activeUser.grade_name}}</span>
+                                  <span class="ml-2">{{activeUser.userName}}</span>
+                                  <span class="ml-2">{{activeUser.school}}</span>
+                                  <span class="ml-2">{{activeUser.grade}}</span>
                                   <a [routerLink]="" (click)="goToChallenge(activeUser)" class="ml-auto kf-challenge btn btn-sm btn-primary">
                                       <i class="fa fa-bolt"></i>
                                       Challenge

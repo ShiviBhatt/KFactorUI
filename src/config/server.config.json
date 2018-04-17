@@ -3,5 +3,7 @@
     "port": "4444",
     "appContext": "quizUp",
     "restContext": "v1",
-    "sslEnabled": false
+    "sslEnabled": false,
+    "socketServerDomain": "172.30.0.144",
+    "socketServerPort": "3000"
 }

@@ -105,7 +105,10 @@ export class HomeComponent implements OnInit {
             .subscribe((userStats) => {
               this.userStats = userStats;
               this.userStats.topics = this.userStats.topics_int.split(',');
-              this.userStats.successRate = userStats.win > 0 ? Math.ceil(Number(userStats.win / userStats.participated) * 100) : 0;
+              this.userStats.win = 52;
+              this.userStats.participated = 124;
+              this.userStats.loss = 72;
+              this.userStats.successRate = this.userStats.win > 0 ? Math.ceil(Number(this.userStats.win / this.userStats.participated) * 100) : 0;
             });
         }
       });
