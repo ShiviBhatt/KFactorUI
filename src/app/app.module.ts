@@ -18,6 +18,7 @@ import { SocketService } from './socket.service';
 import { MockDataService } from './mock-data.service';
 import { ChallengeCompleteComponent } from './challenge-complete/challenge-complete.component';
 import { AuthInterceptorService } from './auth-interceptor.service';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { AuthInterceptorService } from './auth-interceptor.service';
     PlaygroundComponent,
     ChallengeViewerComponent,
     ProfileComponent,
-    ChallengeCompleteComponent
+    ChallengeCompleteComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

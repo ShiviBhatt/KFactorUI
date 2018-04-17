@@ -65,9 +65,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   userMenuNavigation(userMenu: KFMenu): void {
-    if (userMenu.id === 'profile') {
-      this.router.navigate(['/profile']);
-    }
+    this.router.navigate(['/'+ userMenu.id]);
   }
 
 }

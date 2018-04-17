@@ -7,6 +7,7 @@ import { PlaygroundComponent } from './playground/playground.component';
 import { ChallengeViewerComponent } from './challenge-viewer/challenge-viewer.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChallengeCompleteComponent } from './challenge-complete/challenge-complete.component';
+import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'challenges/:id/start', component: PlaygroundComponent },
   { path: 'board', component: BoardComponent },
   { path: 'challenges/:id/end', component: ChallengeCompleteComponent },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', component: ProfileComponent },
+  { path: 'logout', component: LogoutComponent }
 ];
 
 @NgModule({

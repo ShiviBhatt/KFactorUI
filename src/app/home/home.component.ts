@@ -90,7 +90,6 @@ export class HomeComponent implements OnInit {
         this.mockDataServie.user.grade = this.userDetails.gradeLevel;
         this.mockDataServie.user.school = this.userDetails.schoolName;
         this.mockDataServie.user.userName = this.userDetails.firstName;
-        console.log(this.mockDataServie);
         this.userDetails.age =  new Date().getFullYear() - new Date(this.userDetails.dateOfBirth).getFullYear();
         this.checkUserExists();
       });
@@ -162,18 +161,18 @@ export class HomeComponent implements OnInit {
       'gender': '',
       'dob': this.userDetails.dateOfBirth,
       'topics_int': this.interestedTopics.join(', '),
-      'show_flag': this.doNotShowAgain ? 1 : 0
+      'show_flag': this.doNotShowAgain ? 0 : 1
     };
     this.dataService.postData('user', this.addUserData)
       .subscribe((res) => {
-
+        console.log(res);
       });
   }
 
   updateUser(): void {
     this.updateUserData = {
       'user_name': this.userDetails.userName,
-      'show_flag': 1,
+      'show_flag': 0,
       'topics_int': this.interestedTopics.join(', ')
     };
     this.dataService.putData('user/'+ localStorage.getItem('uid'), this.updateUserData)
