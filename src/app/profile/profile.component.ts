@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit{
     saveUserDetails(): void {
         this.updateUserData = {
             'user_name': this.userData.user_name,
-            'show_flag': this.userData.show_flag,
+            'show_flag': this.selectedTopics.length > 0 ? 0 : this.userData.show_flag,
             'topics_int': this.selectedTopics.join(', ')
           };
           this.dataService.putData('user/'+ localStorage.getItem('uid'), this.updateUserData)

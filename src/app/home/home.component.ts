@@ -78,6 +78,7 @@ export class HomeComponent implements OnInit {
             });
         } else {
           this.showModal = true;
+          localStorage.setItem('showModal', 'false');
         }
       });
   }
