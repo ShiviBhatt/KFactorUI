@@ -33,6 +33,8 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     }
 
     this.getUsers();
+    this.topics = topics.topics;
+    this.selectedTopic = this.topics[0];
   }
 
   getUsers(): void {
