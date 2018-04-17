@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
           this.dataService.getData('user/showPopUp/'+ localStorage.getItem('uid'))
             .subscribe((showPopUp) => {
               if (!localStorage.getItem('showModal')) {
-                this.showModal = showPopUp;
+                this.showModal = !showPopUp;
               } else {
                 this.showModal = false;
               }
@@ -165,7 +165,7 @@ export class HomeComponent implements OnInit {
       'gender': '',
       'dob': this.userDetails.dateOfBirth,
       'topics_int': this.interestedTopics.join(', '),
-      'show_flag': this.doNotShowAgain ? 0 : 1
+      'show_flag': this.doNotShowAgain ? 1 : 0
     };
     this.dataService.postData('user', this.addUserData)
       .subscribe((res) => {
@@ -176,7 +176,7 @@ export class HomeComponent implements OnInit {
   updateUser(): void {
     this.updateUserData = {
       'user_name': this.userDetails.userName,
-      'show_flag': 0,
+      'show_flag': 1,
       'topics_int': this.interestedTopics.join(', ')
     };
     this.dataService.putData('user/'+ localStorage.getItem('uid'), this.updateUserData)
